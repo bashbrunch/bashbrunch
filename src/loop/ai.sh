@@ -79,9 +79,13 @@ ai_loop() {
       request_exit
       ;;
     *)
-      add_chat "system" "Unknown command: $command"
-      println "Unknown command: $command"
-      println ""
+      extensions_command "$command" "$content"
+
+      if [ $? -ne 0 ]; then
+        add_chat "system" "Unknown command: $command"
+        println "Unknown command: $command"
+        println ""
+      fi
       ;;
   esac
 }

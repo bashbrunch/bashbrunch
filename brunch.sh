@@ -15,10 +15,13 @@ source "$brunch_root/src/core/version.sh"
 source "$brunch_root/src/core/arguments.sh"
 source "$brunch_root/src/mgr/chat.sh"
 source "$brunch_root/src/mgr/control.sh"
+source "$brunch_root/src/mgr/extensions.sh"
 source "$brunch_root/src/tool/shell.sh"
 source "$brunch_root/src/tool/ssf.sh"
 source "$brunch_root/src/loop/ai.sh"
 source "$brunch_root/src/loop/user.sh"
+
+source_extensions
 
 println "BashBrunch $version"
 println "Use /? for help"
@@ -29,12 +32,15 @@ println "Active Provider: $provider"
 println "Active Model: $model"
 println ""
 
+extensions_load
+
 while [ true ]; do
   if [ "$requested_exit" -ne 0 ]; then
     break
   fi
 
   active=$(get_controller)
+  extensions_pre_loop
 
   if [ "$active" = "user" ]; then
     use_color_user
@@ -43,6 +49,8 @@ while [ true ]; do
     use_color_ai
     ai_loop
   fi
+
+  extensions_post_loop
 done
 
 if [ $requested_exit -eq 2 ]; then
