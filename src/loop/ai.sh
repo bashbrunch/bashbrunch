@@ -40,6 +40,9 @@ ai_loop() {
   local cmdtype=$(is_cmd_type "$command")
 
   if [ "$cmdtype" -eq 0 ]; then
+    add_chat "system" "Response was not a command. Ignored."
+    println "Response was not a command. Ignored."
+    println ""
     continue
   fi
   
