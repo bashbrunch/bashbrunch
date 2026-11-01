@@ -95,8 +95,13 @@ user_loop() {
       ;;
     *)
       cmdtype=$(is_cmd_type "$command")
-      if [ "$valid" -ne 0 ]; then
-        println "Unknown command: $command"
+      
+      if [ "$cmdtype" -ne 0 ]; then        
+        extensions_command "$command" "$content"
+        
+        if [ $? -ne 0 ]; then
+          println "Unknown command: $command"
+        fi
       fi
       ;;
   esac

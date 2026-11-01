@@ -21,3 +21,5 @@ api_key=$(cat $api_key_file)
 model_select_file="$data_dir/models/$provider.txt"
 model=$(cat $model_select_file)
 
+extension_dir="$brunch_root/extensions"
+
