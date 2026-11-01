@@ -181,19 +181,51 @@ Models are completely dependent on the provider. BashBrunch does not provide any
 
 ## Flags
 
-| Flag | Description | Alias |
-|------|-------------|-------|
-| `--version` | Show version | `-v` |
-| `--help` | Show help | `-h` |
-| `--session <session_id>` | Resume a previous session | `--resume`, `-s`, `-r` |
-| `--incognito` | Do not save session | `-i` |
-| `--plain` | Disable colors | `-p` |
+| Flag                     | Description                  | Alias                  |
+| ------------------------ | ---------------------------- | ---------------------- |
+| `--version`              | Show version                 | `-v`                   |
+| `--help`                 | Show help                    | `-h`                   |
+| `--session <session_id>` | Resume a previous session    | `--resume`, `-s`, `-r` |
+| `--incognito`            | Do not save session          | `-i`                   |
+| `--plain`                | Disable colors               | `-p`                   |
+| `--provider <provider>`  | Select an AI provider        | `-P`                   |
+| `--model <model>`        | Specify the AI model         | `-M`                   |
+| `--key <api_key>`        | Specify the provider API key | `-K`                   |
 
 ## Environment Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `BRUNCH_ROOT` | Installation directory | `~/.bashbrunch` |
+
+## Extensions
+
+### What are Extensions?
+
+Extensions are shell scripts that can be added to BashBrunch to extend its functionality. They are sourced when BashBrunch starts, allowing you to add custom commands, functions, or any other bash code that you want to run in the BashBrunch environment.
+
+An extension can run:
+- When BashBrunch starts
+- Before every loop iteration
+- After every loop iteration
+- Via commands
+
+### Security Considerations
+
+**Extensions share all variables and functions with BashBrunch**. _This means that extension can potentially access sensitive data like API keys, chat history, etc. Be careful when adding extensions from untrusted sources._
+
+### Creating an Extension
+
+1. Create a shell script with a `.sh` extension.
+2. Define functions and commands in the script.
+  - For function that runs when BashBrunch starts, define a function named `load_${extension_name}`. (Note that `${extension_name}` is the name of your extension script without the `.sh` extension, it must match or it won't be called.)
+  - For function that runs before every loop iteration, define a function named `pre_loop_${extension_name}`.
+  - For function that runs after every loop iteration, define a function named `post_loop_${extension_name}`.
+  - For commands, define a function prefixed with `command_` and the command name. (For example, if you want to add a command `/hello`, define a function named `command_hello`.)
+
+### Adding Extensions
+
+Once you have an extension script ready, you can add it to BashBrunch by placing it in the `extensions/` folder in the installation directory (`~/.bashbrunch/extensions/`). The script must have a `.sh` extension.
 
 ## Requirements
 

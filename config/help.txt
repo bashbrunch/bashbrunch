@@ -1,4 +1,4 @@
-Welcome to BashBrunch! A minimal terminal-based coding harness. In here, the AI assistant can access tools to help you do your work. It will be using bash directly and will be communicating with you through this interface.
+Welcome to BashBrunch! A minimal yet powerful terminal harness. In here, the AI assistant can access tools to help you do your work. It will be using bash directly and will be communicating with you through this interface.
 
 Available commands:
 /? - Show this help message
@@ -8,4 +8,22 @@ Available commands:
 /m <model_name> - Change the model
 /k <api_key> - Set the API key for the current provider
 /q - Exit the program
+
+Startup flags:
+  --version, -v
+    Show the version and exit
+  --help, -h
+    Show help and exit
+  --session <session_id>, --resume, -s, -r
+    Resume a previous session
+  --incognito, -i
+    Do not save the session
+  --plain, -p
+    Disable terminal colors
+  --provider <provider_name>, -P
+    Select the AI provider
+  --model <model_name>, -M
+    Specify the AI model
+  --key <api_key>, -K
+    Set the provider API key
 
