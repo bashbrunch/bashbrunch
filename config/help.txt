@@ -26,4 +26,10 @@ Startup flags:
     Specify the AI model
   --key <api_key>, -K
     Set the provider API key
+  --remote <url>, -R
+    Start a remote session
+  --remote-pwd <secret>, -S
+    Password for remote session
+  --remote-max-wait <seconds>, -W
+    Pause time between retries
 
