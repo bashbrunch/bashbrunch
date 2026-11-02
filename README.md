@@ -30,6 +30,10 @@ While BashBrunch comes with a limited set of providers, one can easily add their
 
 Just because BashBrunch is a simple bash script, it has negligible overhead. It is fast and responsive, and can be used in any terminal without any issues. It can even run in your plain docker container.
 
+### Remote Session Support
+
+BashBrunch allows connecting to remote servers and communicating with it to provide a allow cross-device usage. This allows you to use BashBrunch on a more powerful machine, or from a different device.
+
 ### Optimized for AI
 
 Other harnesses are designed for steering AI to do what you want. BashBrunch is designed for the AI to do what it wants. BashBrunch has a special control system, where control starts with the user but once passed to AI, control stays with the AI until it passes control back to the user.
@@ -181,22 +185,47 @@ Models are completely dependent on the provider. BashBrunch does not provide any
 
 ## Flags
 
-| Flag                     | Description                  | Alias                  |
-| ------------------------ | ---------------------------- | ---------------------- |
-| `--version`              | Show version                 | `-v`                   |
-| `--help`                 | Show help                    | `-h`                   |
-| `--session <session_id>` | Resume a previous session    | `--resume`, `-s`, `-r` |
-| `--incognito`            | Do not save session          | `-i`                   |
-| `--plain`                | Disable colors               | `-p`                   |
-| `--provider <provider>`  | Select an AI provider        | `-P`                   |
-| `--model <model>`        | Specify the AI model         | `-M`                   |
-| `--key <api_key>`        | Specify the provider API key | `-K`                   |
+| Flag                          | Description                  | Alias                  |
+| ----------------------------- | ---------------------------- | ---------------------- |
+| `--version`                   | Show version                 | `-v`                   |
+| `--help`                      | Show help                    | `-h`                   |
+| `--session <session_id>`      | Resume a previous session    | `--resume`, `-s`, `-r` |
+| `--incognito`                 | Do not save session          | `-i`                   |
+| `--plain`                     | Disable colors               | `-p`                   |
+| `--provider <provider>`       | Select an AI provider        | `-P`                   |
+| `--model <model>`             | Specify the AI model         | `-M`                   |
+| `--key <api_key>`             | Specify the provider API key | `-K`                   |
+| `--remote <url>`              | Start a remote session       | `-R`                   |
+| `--remote-password <secret>`  | Password for remote session  | `-S`                   |
+| `--remote-max-wait <seconds>` | Pause time between retries   | `-W`                   |
 
-## Environment Variables
+## Remote Sessions
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `BRUNCH_ROOT` | Installation directory | `~/.bashbrunch` |
+Remote sessions allow you to connect to a remote server and use BashBrunch from there. This is useful for accessing BashBrunch from a different machine or when you want to use a more powerful system.
+
+Remote sessions are started and configured by the flags only. Additionally, to use a remote server, ensure that the server is running beforehand.
+
+### Remote Server Contracts
+
+BashBrunch assumes that the remote server is RESTful and has the following endpoints:
+
+- `[POST] /shell`
+  - Purpose: Store outputs and logs of BashBrunch.
+  - Request Body: Lines of plain text of latest outputs and logs.
+  - Response: `200 OK` on success.
+- `[GET] /shell`
+  - Purpose: Streams the latest outputs and logs of BashBrunch.
+  - Response: `200 OK` streaming plain text of latest outputs and logs.
+- `[POST] /message`
+  - Purpose: Send a message to the remote server.
+  - Request Body: Lines of plain text of the message.
+  - Response: `200 OK` on success, `400 Bad Request` if no message is provided.
+- `[GET] /message`
+  - Purpose: Sends a key along with the first message in the queue.
+  - Response: `200 OK` with key in line 1 and content from line 2 onwards, or `404 Not Found` if no message is available.
+- `[DELETE] /message`
+  - Purpose: Deletes the first message in the queue.
+  - Response: `200 OK` on success, `400 Bad Request` in any other case.
 
 ## Extensions
 
@@ -226,6 +255,12 @@ An extension can run:
 ### Adding Extensions
 
 Once you have an extension script ready, you can add it to BashBrunch by placing it in the `extensions/` folder in the installation directory (`~/.bashbrunch/extensions/`). The script must have a `.sh` extension.
+
+## Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `BRUNCH_ROOT` | Installation directory | `~/.bashbrunch` |
 
 ## Requirements
 
