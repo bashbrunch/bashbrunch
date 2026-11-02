@@ -2,9 +2,7 @@ user_buffer=""
 user_result=""
 
 get_user_input() {
-  local empty=""
-  read -ep ">$empty>$empty> " prompt
-  history -s "$prompt"
+  prompt=$(request_user_input)  
   user_buffer="$prompt"
 }
 
