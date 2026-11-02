@@ -1,6 +1,7 @@
 resuming=0
 incognito=0
 colorfree=0
+remote_url=""
 
 order_check() {
   local arg1="$1"
@@ -91,6 +92,15 @@ parse_args() {
         fi
 
         api_key="$1"
+        shift
+        ;;
+      --remote|-R)
+        if [ -z "$1" ]; then
+          println "Please provide a remote URL."
+          exit 1
+        fi
+
+        remote_url="$1"
         shift
         ;;
     esac
