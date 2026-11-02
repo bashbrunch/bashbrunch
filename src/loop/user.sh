@@ -2,9 +2,11 @@ user_buffer=""
 user_result=""
 
 get_user_input() {
-  local empty=""
-  read -ep ">$empty>$empty> " prompt
-  history -s "$prompt"
+  prompt=$(request_user_input)
+  if [ -n "$remote_url" ]; then
+    println "Remote Input: $prompt"
+  fi
+
   user_buffer="$prompt"
 }
 
