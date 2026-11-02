@@ -15,9 +15,11 @@ request_remote_input() {
     fi
     
     wait=1
-    data=$(curl -fs "${remote_url}/message")
     key=""
     content=""
+    data=$(curl -fs "${remote_url}/message" \
+      -H "Authorization: Bearer ${remote_pwd}"
+    )
 
     if [ $? -eq 0 ]; then
       key=$(echo "$data" | head -n 1)
@@ -26,15 +28,17 @@ request_remote_input() {
 
     if [ -n "$key" ]; then
       printf '%s\n' "$content"
-      curl -s "${remote_url}/message/${key}" -X DELETE
+      curl -s "${remote_url}/message/${key}" \
+        -H "Authorization: Bearer ${remote_pwd}" \
+        -X DELETE > /dev/null
       
       break
     fi
 
     interval=$((interval * 2))
     
-    if [ $interval -gt 60 ]; then
-      interval=60
+    if [ $interval -gt $remote_max_wait ]; then
+      interval=$remote_max_wait
     fi
   done
 }

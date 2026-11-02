@@ -2,7 +2,11 @@ user_buffer=""
 user_result=""
 
 get_user_input() {
-  prompt=$(request_user_input)  
+  prompt=$(request_user_input)
+  if [ -n "$remote_url" ]; then
+    println "Remote Input: $prompt"
+  fi
+
   user_buffer="$prompt"
 }
 

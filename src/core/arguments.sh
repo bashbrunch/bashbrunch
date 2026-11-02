@@ -2,6 +2,8 @@ resuming=0
 incognito=0
 colorfree=0
 remote_url=""
+remote_pwd=""
+remote_max_wait=60
 
 order_check() {
   local arg1="$1"
@@ -101,6 +103,24 @@ parse_args() {
         fi
 
         remote_url="$1"
+        shift
+        ;;
+      --remote-password|-S)
+        if [ -z "$1" ]; then
+          println "Please provide a remote password."
+          exit 1
+        fi
+
+        remote_pwd="$1"
+        shift
+        ;;
+      --remote-max-wait|-W)
+        if [ -z "$1" ]; then
+          println "Please provide a maximum wait time in seconds."
+          exit 1
+        fi
+
+        remote_max_wait="$1"
         shift
         ;;
     esac
