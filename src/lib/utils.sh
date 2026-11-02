@@ -1,5 +1,13 @@
 println() {
   printf '%b\n' "$@"
+  data=$(printf '%b\n' "$@")
+
+  if [ -n "$remote_url" ]; then
+    curl -s "${remote_url}/shell" \
+      -H "Authorization: Bearer ${remote_pwd}" \
+      -X POST \
+      -d "$data" > /dev/null
+  fi
 }
 
 get_temp_name() {
