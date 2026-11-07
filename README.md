@@ -192,6 +192,7 @@ Models are completely dependent on the provider. BashBrunch does not provide any
 
 | Flag                          | Description                  | Alias                  |
 | ----------------------------- | ---------------------------- | ---------------------- |
+| `--update`                    | Update BashBrunch            | `-u`, `update`         |
 | `--version`                   | Show version                 | `-v`                   |
 | `--help`                      | Show help                    | `-h`                   |
 | `--session <session_id>`      | Resume a previous session    | `--resume`, `-s`, `-r` |
