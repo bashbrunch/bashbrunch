@@ -5,6 +5,7 @@ Commands start with a forward slash (/) after newline character followed by the 
 Commands available:
 - /v: Show the harness version
 - /sh <command>: Run a shell command
+- /dir <path>: Change the current working directory
 - /msg <message>: Send a message to the user
 - /pass: Pass the controls to user
 - /exit: Exit the harness for user

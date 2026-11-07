@@ -3,6 +3,7 @@ Welcome to BashBrunch! A minimal yet powerful terminal harness. In here, the AI 
 Available commands:
 /? - Show this help message
 /! <command> - Execute a shell command
+/d <path> - Change the current working directory
 /v - Show the current version
 /p <provider_name> - Change the provider
 /m <model_name> - Change the model

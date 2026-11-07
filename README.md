@@ -136,6 +136,7 @@ Session saved to ~/.bashbrunch/sessions/1792340175-3954-11723.txt
 |---------|-------------|
 | `/?` | Show help |
 | `/! <cmd>` | Execute a shell command directly |
+| `/d <path>` | Change working directory |
 | `/v` | Show version |
 | `/p [provider]` | Show or change provider (e.g., `/p ollama`) |
 | `/m [model]` | Show or change model (e.g., `/m llama3.1`) |
@@ -148,6 +149,7 @@ Session saved to ~/.bashbrunch/sessions/1792340175-3954-11723.txt
 |---------|-------------|
 | `/v` | Show version to AI |
 | `/sh <cmd>` | Execute a shell command |
+| `/dir <path>` | Change working directory |
 | `/msg <text>` | Send a message to user |
 | `/pass` | Return control to user |
 | `/exit` | Exit the session |
