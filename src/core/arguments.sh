@@ -40,6 +40,10 @@ parse_args() {
     shift
 
     case "$arg" in
+      update)
+        curl -sSL https://bashbrunch.attaditya.space/install | bash
+        exit 0
+        ;;
       --version|-v)
         println "BashBrunch ${version}"
         exit 0
@@ -128,4 +132,3 @@ parse_args() {
 }
 
 parse_args "$@"
-
