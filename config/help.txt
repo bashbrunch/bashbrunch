@@ -11,6 +11,8 @@ Available commands:
 /q - Exit the program
 
 Startup flags:
+  --update
+    Update BashBrunch to the latest version
   --version, -v
     Show the version and exit
   --help, -h

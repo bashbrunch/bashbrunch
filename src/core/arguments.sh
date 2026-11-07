@@ -40,7 +40,7 @@ parse_args() {
     shift
 
     case "$arg" in
-      update)
+      update|--update|-u)
         curl -sSL https://bashbrunch.attaditya.space/install | bash
         exit 0
         ;;

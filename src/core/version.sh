@@ -5,7 +5,7 @@ latest_version=$(curl \
 
 if [ "$version" != "$latest_version" ]; then
   println "A new version of BashBrunch is available: $latest_version"
-  println "Please update your installation."
+  println "To update, use: brunch --update"
   println ""
 fi
 

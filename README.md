@@ -10,6 +10,9 @@ curl -fsSL https://bashbrunch.attaditya.space/install | bash
 
 # and to use it, just run
 brunch
+
+# or update with
+brunch --update
 ```
 
 ## Why BashBrunch?
