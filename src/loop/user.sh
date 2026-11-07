@@ -7,6 +7,7 @@ get_user_input() {
     println "Remote Input: $prompt"
   fi
 
+  history -s "$prompt"
   user_buffer="$prompt"
 }
 
@@ -94,6 +95,9 @@ user_loop() {
       ;;
     "/!")
       run_shell "$content"
+      ;;
+    "/d")
+      change_dir "$content"
       ;;
     *)
       cmdtype=$(is_cmd_type "$command")

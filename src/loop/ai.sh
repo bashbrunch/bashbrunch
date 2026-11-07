@@ -56,6 +56,9 @@ ai_loop() {
     "/sh")
       run_shell "$content"
       ;;
+    "/dir")
+      change_dir "$content"
+      ;;
     "/msg")
       printf "$content"
       println "\n"

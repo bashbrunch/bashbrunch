@@ -51,7 +51,6 @@ request_user_input() {
     prompt=$(request_remote_input)
   else
     read -ep ">${empty}>${empty}> " prompt
-    history -s "$prompt"
   fi
   
   printf '%s\n' "$prompt"
