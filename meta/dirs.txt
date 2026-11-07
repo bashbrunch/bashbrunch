@@ -1,0 +1,13 @@
+src
+src/mgr
+src/lib
+src/loop
+src/tool
+src/core
+providers
+config
+data
+data/keys
+data/models
+data/sessions
+extensions
