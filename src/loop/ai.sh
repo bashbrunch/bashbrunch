@@ -39,14 +39,14 @@ ai_loop() {
   local content=$(get_content "$ai_result")
   local cmdtype=$(is_cmd_type "$command")
 
+  add_chat "assistant" "$ai_result"
+
   if [ "$cmdtype" -eq 0 ]; then
     add_chat "system" "Response was not a command. Ignored."
     println "Response was not a command. Ignored."
     println ""
     continue
   fi
-  
-  add_chat "assistant" "$ai_result"
   
   case "$command" in
     "/v")
