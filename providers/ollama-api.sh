@@ -13,7 +13,7 @@ response=$(curl -fsS https://ollama.com/api/generate \
 
 error=$(jq -r '.error' <<< "$response")
 
-if ! [ $error = "null" ]; then
+if ! [ "$error" = "null" ]; then
   error_message=$(jq -r '.error' <<< "$response")
 
   echo "/msg Ollama error: $error_message"
