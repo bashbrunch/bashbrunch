@@ -17,8 +17,8 @@ request_remote_input() {
     wait=1
     key=""
     content=""
-    data=$(curl -fs "${remote_url}/message" \
-      -H "Authorization: Bearer ${remote_pwd}"
+    data=$(curl -fs "${remote_url}/messages" \
+      -H "Authorization: ${remote_pwd}"
     )
 
     if [ $? -eq 0 ]; then
@@ -28,8 +28,8 @@ request_remote_input() {
 
     if [ -n "$key" ]; then
       printf '%s\n' "$content"
-      curl -s "${remote_url}/message/${key}" \
-        -H "Authorization: Bearer ${remote_pwd}" \
+      curl -s "${remote_url}/messages/${key}" \
+        -H "Authorization: ${remote_pwd}" \
         -X DELETE > /dev/null
       
       break
