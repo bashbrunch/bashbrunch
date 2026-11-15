@@ -1,3 +1,19 @@
+remote_push() {
+  if [ -z "$remote_url" ]; then
+    return 0
+  fi
+
+  endpoint=$1
+  shift
+
+  data=$(printf '%b\n' "$@")
+
+  curl -s "${remote_url}/${endpoint}" \
+    -H "Authorization: ${remote_pwd}" \
+    -X POST \
+    -d "$data" > /dev/null
+}
+
 fetch_remote_data() {
   if [ -z "$remote_url" ]; then
     return 1
