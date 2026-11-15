@@ -1,4 +1,5 @@
 resuming=0
+proxying=0
 incognito=0
 colorfree=0
 remote_url=""
@@ -126,6 +127,9 @@ parse_args() {
 
         remote_max_wait="$1"
         shift
+        ;;
+      --proxy|-X)
+        proxying=1
         ;;
     esac
   done

@@ -167,12 +167,14 @@ Providers are the scripts that handle the AI's responses. They can be built-in o
 
 Find the provider scripts in `providers/` folder in the installation directory (`~/.bashbrunch/providers/`).
 
+### Supported Providers
+
+BashBrunch supports a lot of providers including Ollama, Gemini, OpenAI, and more. Check the list of supported providers in the website: [https://bashbrunch.attaditya.space#providers](https://bashbrunch.attaditya.space#providers)
+
 ### Built-in Providers
 
-- `unset` - Placeholder when no provider is configured
-- `ollama` - Local models via Ollama
-- `ollama-curl` - Local models via Ollama using curl
-- `ollama-api` - Cloud models via Ollama API using curl
+- `unset`: Default provider, does not provide any AI responses.
+- `proxy`: Proxy provider, allows you to connect to a remote BashBrunch server. Pass the remote server URL as the API key (e.g., `/k https://my-bashbrunch-otn-server.com`).
 
 ### Custom Providers
 
@@ -204,6 +206,7 @@ Models are completely dependent on the provider. BashBrunch does not provide any
 | `--remote <url>`              | Start a remote session       | `-R`                   |
 | `--remote-password <secret>`  | Password for remote session  | `-S`                   |
 | `--remote-max-wait <seconds>` | Pause time between retries   | `-W`                   |
+| `--proxy <proxy>`             | Start in proxy mode          | `-X`                   |
 
 ## Remote Sessions
 
