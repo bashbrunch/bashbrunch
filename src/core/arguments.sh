@@ -1,4 +1,5 @@
 resuming=0
+proxying=0
 incognito=0
 colorfree=0
 remote_url=""
@@ -6,9 +7,9 @@ remote_pwd=""
 remote_max_wait=60
 
 order_check() {
-  local arg1="$1"
-  local arg2="$2"
-  local args="$3"
+  local args="$1"
+  local arg1="$2"
+  local arg2="$3"
 
   local flipped=$(echo "$args" \
     | grep -- "${arg2}.*${arg1}"
@@ -22,18 +23,57 @@ order_check() {
   exit 1
 }
 
+requisite_check() {
+  local args="$1"
+  local arg1="$2"
+
+  local check_required=$(echo "$args" \
+    | grep -- "${arg1}"
+  )
+
+  if [ -z "$check_required" ]; then
+    return 0
+  fi
+  
+  shift
+  shift
+  
+  local arg_opts="$@"
+  local missing=1
+
+  for arg2 in $arg_opts; do
+    local curr=$(echo "$args" \
+      | grep -- "${arg1}" \
+      | grep -v -- "${arg2}"
+    )
+
+    if [ -z "$curr" ]; then
+      missing=0
+      break
+    fi
+  done
+
+  if [ $missing -eq 1 ]; then
+    println "$arg1 requires $arg2 to be specified"
+    exit 1
+  fi
+}
+
 parse_args() {
   local arg
 
-  order_check "--provider" "--model" "$*"
-  order_check "--provider" "-M" "$*"
-  order_check "-P" "--model" "$*"
-  order_check "-P" "-M" "$*"
+  order_check "$*" "--provider" "--model"
+  order_check "$*" "--provider" "-M"
+  order_check "$*" "-P" "--model"
+  order_check "$*" "-P" "-M"
 
-  order_check "--provider" "--key" "$*"
-  order_check "--provider" "-K" "$*"
-  order_check "-P" "--key" "$*"
-  order_check "-P" "-K" "$*"
+  order_check "$*" "--provider" "--key"
+  order_check "$*" "--provider" "-K"
+  order_check "$*" "-P" "--key"
+  order_check "$*" "-P" "-K"
+
+  requisite_check "$*" "--proxy" "--remote" "-R"
+  requisite_check "$*" "-X" "--remote" "-R"
 
   while [ $# -gt 0 ]; do
     arg="$1"
@@ -127,8 +167,12 @@ parse_args() {
         remote_max_wait="$1"
         shift
         ;;
+      --proxy|-X)
+        proxying=1
+        ;;
     esac
   done
 }
 
 parse_args "$@"
+

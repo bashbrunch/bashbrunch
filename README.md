@@ -167,12 +167,14 @@ Providers are the scripts that handle the AI's responses. They can be built-in o
 
 Find the provider scripts in `providers/` folder in the installation directory (`~/.bashbrunch/providers/`).
 
+### Supported Providers
+
+BashBrunch supports a lot of providers including Ollama, Gemini, OpenAI, and more. Check the list of supported providers in the website: [https://bashbrunch.attaditya.space#providers](https://bashbrunch.attaditya.space#providers)
+
 ### Built-in Providers
 
-- `unset` - Placeholder when no provider is configured
-- `ollama` - Local models via Ollama
-- `ollama-curl` - Local models via Ollama using curl
-- `ollama-api` - Cloud models via Ollama API using curl
+- `unset`: Default provider, does not provide any AI responses.
+- `proxy`: Proxy provider, allows you to connect to a remote BashBrunch server. Pass the remote server URL as the API key (e.g., `/k https://my-bashbrunch-otn-server.com`).
 
 ### Custom Providers
 
@@ -204,6 +206,7 @@ Models are completely dependent on the provider. BashBrunch does not provide any
 | `--remote <url>`              | Start a remote session       | `-R`                   |
 | `--remote-password <secret>`  | Password for remote session  | `-S`                   |
 | `--remote-max-wait <seconds>` | Pause time between retries   | `-W`                   |
+| `--proxy <proxy>`             | Start in proxy mode          | `-X`                   |
 
 ## Remote Sessions
 
@@ -213,25 +216,7 @@ Remote sessions are started and configured by the flags only. Additionally, to u
 
 ### Remote Server Contracts
 
-BashBrunch assumes that the remote server is RESTful and has the following endpoints:
-
-- `[POST] /shell`
-  - Purpose: Store outputs and logs of BashBrunch.
-  - Request Body: Lines of plain text of latest outputs and logs.
-  - Response: `200 OK` on success.
-- `[GET] /shell`
-  - Purpose: Streams the latest outputs and logs of BashBrunch.
-  - Response: `200 OK` streaming plain text of latest outputs and logs.
-- `[POST] /message`
-  - Purpose: Send a message to the remote server.
-  - Request Body: Lines of plain text of the message.
-  - Response: `200 OK` on success, `400 Bad Request` if no message is provided.
-- `[GET] /message`
-  - Purpose: Sends a key along with the first message in the queue.
-  - Response: `200 OK` with key in line 1 and content from line 2 onwards, or `404 Not Found` if no message is available.
-- `[DELETE] /message`
-  - Purpose: Deletes the first message in the queue.
-  - Response: `200 OK` on success, `400 Bad Request` in any other case.
+BashBrunch assumes that the remote server is RESTful. For reference, check the remote server codebase (bare-minimum implementation) at [@bashbrunch/remote-server](https://github.com/bashbrunch/remote-server).
 
 ## Extensions
 
