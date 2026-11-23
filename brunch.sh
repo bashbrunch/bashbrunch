@@ -11,6 +11,7 @@ source "$brunch_root/src/lib/colors.sh"
 source "$brunch_root/src/lib/utils.sh"
 source "$brunch_root/src/lib/remote.sh"
 source "$brunch_root/src/lib/inputs.sh"
+source "$brunch_root/src/lib/generations.sh"
 source "$brunch_root/src/lib/cmd.sh"
 source "$brunch_root/src/core/paths.sh"
 source "$brunch_root/src/core/version.sh"
@@ -21,8 +22,9 @@ source "$brunch_root/src/mgr/extensions.sh"
 source "$brunch_root/src/tool/shell.sh"
 source "$brunch_root/src/tool/dir.sh"
 source "$brunch_root/src/tool/ssf.sh"
-source "$brunch_root/src/loop/ai.sh"
 source "$brunch_root/src/loop/user.sh"
+source "$brunch_root/src/loop/ai.sh"
+source "$brunch_root/src/loop/proxy.sh"
 
 source_extensions
 
@@ -45,7 +47,9 @@ while [ true ]; do
   active=$(get_controller)
   extensions_pre_loop
 
-  if [ "$active" = "user" ]; then
+  if [ $proxying -ne 0 ]; then
+    proxy_loop
+  elif [ "$active" = "user" ]; then
     use_color_user
     user_loop
   elif [ "$active" = "ai" ]; then
