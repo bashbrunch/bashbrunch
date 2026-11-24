@@ -218,6 +218,10 @@ Remote sessions are started and configured by the flags only. Additionally, to u
 
 BashBrunch assumes that the remote server is RESTful. For reference, check the remote server codebase (bare-minimum implementation) at [@bashbrunch/remote-server](https://github.com/bashbrunch/remote-server).
 
+## Proxy Mode
+
+BashBrunch supports proxy mode, which allows the Proxy Mode BashBrunch to connect to remote server and act as a proxy for providing AI responses. This is useful when you have a powerful device that has a great providers setup, but you want to use it from a different device.
+
 ## Extensions
 
 ### What are Extensions?
