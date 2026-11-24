@@ -174,7 +174,7 @@ BashBrunch supports a lot of providers including Ollama, Gemini, OpenAI, and mor
 ### Built-in Providers
 
 - `unset`: Default provider, does not provide any AI responses.
-- `proxy`: Proxy provider, allows you to connect to a remote BashBrunch server. Pass the remote server URL as the API key (e.g., `/k https://my-bashbrunch-otn-server.com`).
+- `proxy`: Proxy provider, allows you to connect to a remote BashBrunch server. Pass the remote server URL as the Model (e.g., `/m https://my-bashbrunch-otn-server.com`) and the password as the API key (e.g., `/k my-secret-password`).
 
 ### Custom Providers
 

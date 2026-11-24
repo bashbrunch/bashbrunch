@@ -1,7 +1,7 @@
-remote_url=$1
+remote_pwd=$1
+remote_url=$2
 prompt=$3
 
-source "$BRUNCH_ROOT/src/lib/remote.sh"
 remote_push "prompts" "$prompt"
 fetch_remote_data "proxies"
 

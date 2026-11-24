@@ -26,6 +26,11 @@ source "$brunch_root/src/loop/user.sh"
 source "$brunch_root/src/loop/ai.sh"
 source "$brunch_root/src/loop/proxy.sh"
 
+export remote_max_wait
+
+export -f remote_push
+export -f fetch_remote_data
+
 source_extensions
 
 println "BashBrunch $version"
