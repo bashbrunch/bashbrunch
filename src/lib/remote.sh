@@ -54,7 +54,7 @@ fetch_remote_data() {
 
     interval=$((interval * 2))
     
-    if [ $interval -gt $remote_max_wait ]; then
+    if [[ $interval -gt $remote_max_wait ]]; then
       interval=$remote_max_wait
     fi
   done
