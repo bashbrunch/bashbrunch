@@ -1,14 +1,21 @@
 ai_buffer=""
 ai_result=""
 
+get_context_prompt() {
+  println "$chat_history"
+  println "\nSystem Prompt:"
+  println "$system_prompt"
+}
+
 get_ai_input() {
   buffer_pending=$(println "$ai_buffer" | wc -w | xargs)
+  context_prompt=$(get_context_prompt)
 
   if [ "$buffer_pending" -eq 0 ]; then
     ai_buffer=$(bash $provider_file \
       "$api_key" \
       "$model" \
-      "$chat_history"
+      "$context_prompt"
     )
   fi
 }
