@@ -142,6 +142,10 @@ fetch_remote_data() {
       fetch_data "$endpoint" "$cursor_key"
       atomic_start "$endpoint"
 
+      if [ "$atomic" -eq 0 ]; then
+        atomic_close "$endpoint"
+      fi
+
       break
     fi
 
