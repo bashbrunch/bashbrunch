@@ -1,6 +1,5 @@
 println() {
   printf '%b\n' "$@"
-  data=$(printf '%b\n' "$@")
 }
 
 get_temp_name() {
