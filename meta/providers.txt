@@ -1,0 +1,8 @@
+gemini
+groq
+ollama-api
+ollama-curl
+ollama
+openai
+proxy
+unset
