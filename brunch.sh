@@ -16,6 +16,7 @@ source "$brunch_root/src/lib/cmd.sh"
 source "$brunch_root/src/core/paths.sh"
 source "$brunch_root/src/core/version.sh"
 source "$brunch_root/src/core/arguments.sh"
+source "$brunch_root/src/core/exports.sh"
 source "$brunch_root/src/mgr/chat.sh"
 source "$brunch_root/src/mgr/control.sh"
 source "$brunch_root/src/mgr/extensions.sh"
@@ -26,10 +27,8 @@ source "$brunch_root/src/loop/user.sh"
 source "$brunch_root/src/loop/ai.sh"
 source "$brunch_root/src/loop/proxy.sh"
 
-export remote_max_wait
-
-export -f remote_push
-export -f fetch_remote_data
+export_variables
+export_functions
 
 source_extensions
 
