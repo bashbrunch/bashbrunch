@@ -81,7 +81,9 @@ parse_args() {
 
     case "$arg" in
       update|--update|-u)
-        curl -sSL https://bashbrunch.attaditya.space/install | bash
+        curl -sSL https://bashbrunch.attaditya.space/install \
+          | bash -s -- --continue
+
         exit 0
         ;;
       --version|-v)
