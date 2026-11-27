@@ -22,7 +22,7 @@ add_chat() {
 
   printf '%b\n' "${line}\n" >> "$session_file"
   chat_history="${chat_history}${line}\n"
-  remote_push "log" "${line}\n"
+  remote_push "logs" "${line}\n"
 }
 
 post_session() {

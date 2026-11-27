@@ -19,43 +19,35 @@ TX_SHELL=$'\033[38;2;'${COLOR_WHITE}m
 BG_RESET=$'\033[49m'
 TX_RESET=$'\033[39m'
 
-use_color_reset() {
+use_color() {
   if [ "$colorfree" -ne 0 ]; then
     return 0
   fi
 
-  printf "${BG_RESET}${TX_RESET}"
+  local bg="$1"
+  local tx="$2"
+  local newline="${3:-}"
+
+  printf "\r${bg}${tx}%*s\r" "$(tput cols)" ""
+}
+
+use_color_reset() {
+  use_color "$BG_RESET" "$TX_RESET"
 }
 
 use_color_user() {
-  if [ "$colorfree" -ne 0 ]; then
-    return 0
-  fi
-
-  printf "${BG_USER}${TX_USER}\n"
+  use_color "$BG_USER" "$TX_USER" "\n"
 }
 
 use_color_ai() {
-  if [ "$colorfree" -ne 0 ]; then
-    return 0
-  fi
-
-  printf "${BG_AI}${TX_AI}"
+  use_color "$BG_AI" "$TX_AI"
 }
 
 use_color_tool() {
-  if [ "$colorfree" -ne 0 ]; then
-    return 0
-  fi
-
-  printf "${BG_TOOL}${TX_TOOL}"
+  use_color "$BG_TOOL" "$TX_TOOL"
 }
 
 use_color_shell() {
-  if [ "$colorfree" -ne 0 ]; then
-    return 0
-  fi
-
-  printf "${BG_SHELL}${TX_SHELL}\n"
+  use_color "$BG_SHELL" "$TX_SHELL" "\n"
 }
 
